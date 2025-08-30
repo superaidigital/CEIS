@@ -176,16 +176,17 @@
     </div>
 
     <script>
+        // Data source based on MDES criteria, March 2023 (พ.ศ. 2566) - Verified and Corrected
         const specData = {
             "pc-office": {
                 name: "เครื่องคอมพิวเตอร์สำหรับงานสำนักงาน",
-                price: "16000",
+                price: "20000",
                 specs: {
                     cpu_cores: { label: "CPU (Cores)", type: "number", min: 6, unit: "Cores" },
                     cpu_ghz: { label: "ความเร็วสัญญาณนาฬิกาพื้นฐาน (GHz)", type: "number", min: 2.5, step: 0.1, unit: "GHz" },
                     cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 10000, unit: "คะแนน" },
                     ram: { label: "RAM (GB)", type: "number", min: 8, unit: "GB DDR4" },
-                    storage: { label: "Storage (GB)", type: "number", min: 256, unit: "GB SSD" },
+                    storage: { label: "หน่วยจัดเก็บข้อมูล (Storage)", type: "storage_choice", min_ssd: 250, min_hdd: 1000 },
                     display: { label: "จอภาพ (นิ้ว)", type: "number", min: 19, unit: 'นิ้ว Full HD' },
                     dvd: { label: "DVD Drive", type: "boolean", required: true },
                     network: { label: "Network Interface", type: "boolean", required: true, text: "1 Gbps" },
@@ -194,13 +195,13 @@
             },
             "pc-processing": {
                 name: "เครื่องคอมพิวเตอร์สำหรับงานประมวลผล แบบที่ 1",
-                price: "22000",
+                price: "24000",
                 specs: {
                     cpu_cores: { label: "CPU (Cores)", type: "number", min: 6, unit: "Cores" },
                     cpu_ghz: { label: "ความเร็วสัญญาณนาฬิกาพื้นฐาน (GHz)", type: "number", min: 3.0, step: 0.1, unit: "GHz" },
                     cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 15000, unit: "คะแนน" },
                     ram: { label: "RAM (GB)", type: "number", min: 16, unit: "GB DDR4" },
-                    storage: { label: "Storage (GB)", type: "number", min: 512, unit: "GB SSD" },
+                    storage: { label: "Storage (GB)", type: "number", min: 500, unit: "GB SSD" },
                     display: { label: "จอภาพ (นิ้ว)", type: "number", min: 19, unit: 'นิ้ว Full HD' },
                     dvd: { label: "DVD Drive", type: "boolean", required: true },
                     network: { label: "Network Interface", type: "boolean", required: true, text: "1 Gbps" },
@@ -209,7 +210,7 @@
             },
             "pc-processing-2": {
                 name: "เครื่องคอมพิวเตอร์สำหรับงานประมวลผล แบบที่ 2",
-                price: "30000",
+                price: "32000",
                 specs: {
                     cpu_cores: { label: "CPU (Cores)", type: "number", min: 8, unit: "Cores" },
                     cpu_threads: { label: "CPU (Threads)", type: "number", min: 16, unit: "Threads" },
@@ -224,28 +225,41 @@
             },
             "aio-office": {
                 name: "เครื่องคอมพิวเตอร์ All-in-One สำหรับงานสำนักงาน",
-                price: "21000",
+                price: "20000",
                 specs: {
                     cpu_cores: { label: "CPU (Cores)", type: "number", min: 6, unit: "Cores" },
                     cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 10000, unit: "คะแนน" },
                     ram: { label: "RAM (GB)", type: "number", min: 8, unit: "GB DDR4" },
-                    storage: { label: "Storage (GB)", type: "number", min: 256, unit: "GB SSD" },
+                    storage: { label: "หน่วยจัดเก็บข้อมูล (Storage)", type: "storage_choice", min_ssd: 250, min_hdd: 1000 },
                     display: { label: "จอภาพ (นิ้ว)", type: "number", min: 21.5, step: 0.1, unit: 'นิ้ว Full HD (Built-in)' },
+                    network: { label: "Network Interface", type: "boolean", required: true, text: "1 Gbps" },
+                    wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
+                }
+            },
+            "aio-processing": {
+                name: "เครื่องคอมพิวเตอร์ All-in-One สำหรับงานประมวลผล",
+                price: "24000",
+                specs: {
+                    cpu_cores: { label: "CPU (Cores)", type: "number", min: 6, unit: "Cores" },
+                    cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 15000, unit: "คะแนน" },
+                    ram: { label: "RAM (GB)", type: "number", min: 16, unit: "GB DDR4" },
+                    storage: { label: "Storage (GB)", type: "number", min: 500, unit: "GB SSD" },
+                    display: { label: "จอภาพ (นิ้ว)", type: "number", min: 23.8, step: 0.1, unit: 'นิ้ว Full HD (Built-in)' },
                     network: { label: "Network Interface", type: "boolean", required: true, text: "1 Gbps" },
                     wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
                 }
             },
             "notebook-office": {
                 name: "เครื่องคอมพิวเตอร์โน้ตบุ๊ก สำหรับงานสำนักงาน",
-                price: "16000",
+                price: "19000",
                 specs: {
                     cpu_cores: { label: "CPU (Cores)", type: "number", min: 4, unit: "Cores" },
                     cpu_ghz: { label: "ความเร็วสัญญาณนาฬิกาพื้นฐาน (GHz)", type: "number", min: 2.0, step: 0.1, unit: "GHz" },
                     cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 6500, unit: "คะแนน" },
                     ram: { label: "RAM (GB)", type: "number", min: 8, unit: "GB DDR4" },
-                    storage: { label: "Storage (GB)", type: "number", min: 256, unit: "GB SSD" },
+                    storage: { label: "Storage (GB)", type: "number", min: 250, unit: "GB SSD" },
                     display: { label: "จอภาพ (นิ้ว)", type: "number", min: 14, unit: 'นิ้ว Full HD' },
-                    usb_ports: { label: "USB Ports", type: "number", min: 2, unit: "ช่อง" },
+                    usb_ports: { label: "USB Ports", type: "number", min: 3, unit: "ช่อง" },
                     battery: { label: "Battery (ชั่วโมง)", type: "number", min: 8, unit: "ชั่วโมง" },
                     hdmi_vga: { label: "ช่องต่อ HDMI หรือ VGA", type: "boolean", required: true },
                     wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
@@ -253,18 +267,30 @@
             },
             "notebook-processing": {
                 name: "เครื่องคอมพิวเตอร์โน้ตบุ๊ก สำหรับงานประมวลผล",
-                price: "22000",
+                price: "24000",
                 specs: {
                     cpu_cores: { label: "CPU (Cores)", type: "number", min: 4, unit: "Cores" },
                     cpu_ghz: { label: "ความเร็วสัญญาณนาฬิกาพื้นฐาน (GHz)", type: "number", min: 2.5, step: 0.1, unit: "GHz" },
                     cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 8000, unit: "คะแนน" },
                     ram: { label: "RAM (GB)", type: "number", min: 8, unit: "GB DDR4" },
-                    storage: { label: "Storage (GB)", type: "number", min: 512, unit: "GB SSD" },
+                    storage: { label: "Storage (GB)", type: "number", min: 500, unit: "GB SSD" },
                     display: { label: "จอภาพ (นิ้ว)", type: "number", min: 14, unit: 'นิ้ว Full HD' },
                     usb_ports: { label: "USB Ports", type: "number", min: 3, unit: "ช่อง" },
                     battery: { label: "Battery (ชั่วโมง)", type: "number", min: 8, unit: "ชั่วโมง" },
                     hdmi_vga: { label: "ช่องต่อ HDMI หรือ VGA", type: "boolean", required: true },
                     wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
+                }
+            },
+            "tablet-2": {
+                name: "คอมพิวเตอร์แท็บเล็ต แบบที่ 2",
+                price: "23000",
+                specs: {
+                    cpu_cores: { label: "CPU (Cores)", type: "number", min: 4, unit: "Cores" },
+                    ram: { label: "RAM (GB)", type: "number", min: 2, unit: "GB" },
+                    storage: { label: "Storage (GB)", type: "number", min: 32, unit: "GB" },
+                    display_size: { label: "ขนาดจอภาพ (นิ้ว)", type: "number", min: 9.7, step: 0.1, unit: "นิ้ว" },
+                    display_resolution: { label: "ความละเอียดจอภาพ (ด้านยาว)", type: "number", min: 2048, unit: "Pixels" },
+                    wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน b,g,n,ac" },
                 }
             },
             "printer-inkjet-multi": {
@@ -407,7 +433,10 @@
                 const specDiv = document.createElement('div');
                 specDiv.className = 'p-3 bg-gray-50 rounded-lg';
                 let standardText;
-                if (spec.type === 'number') {
+
+                if (spec.type === 'storage_choice') {
+                    standardText = `SSD ไม่น้อยกว่า ${spec.min_ssd} GB <b>หรือ</b> HDD (SATA) ไม่น้อยกว่า ${spec.min_hdd / 1000} TB`;
+                } else if (spec.type === 'number') {
                     standardText = `ไม่น้อยกว่า ${spec.min} ${spec.unit}`;
                 } else {
                     standardText = `ต้องมี ${spec.text ? `(${spec.text})` : ''}`;
@@ -417,39 +446,66 @@
                 
                 const inputDiv = document.createElement('div');
                 inputDiv.className = 'flex flex-col';
-                
-                const label = document.createElement('label');
-                label.htmlFor = `input-${specKey}`;
-                label.className = 'mb-1 text-sm font-semibold text-gray-600';
-                label.textContent = spec.label;
-                inputDiv.appendChild(label);
-                
-                if (spec.type === 'number') {
-                    const input = document.createElement('input');
-                    input.type = 'number';
-                    input.id = `input-${specKey}`;
-                    input.name = specKey;
-                    input.placeholder = `ขั้นต่ำ ${spec.min}`;
-                    input.className = 'p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500';
-                    input.min = 0;
-                    if(spec.step) input.step = spec.step;
-                    inputDiv.appendChild(input);
+
+                if (spec.type === 'storage_choice') {
+                    const container = document.createElement('div');
+                    // Use md:col-span-2 to make this special component span across two columns on medium screens and up
+                    container.className = 'md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 border p-3 rounded-lg bg-gray-50';
+                    
+                    const typeDiv = document.createElement('div');
+                    typeDiv.className = 'flex flex-col';
+                    typeDiv.innerHTML = `
+                        <label for="input-storage_type" class="mb-1 text-sm font-semibold text-gray-600">${spec.label} - ประเภท</label>
+                        <select id="input-storage_type" name="storage_type" class="p-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="SSD">SSD</option>
+                            <option value="HDD">HDD (SATA)</option>
+                        </select>
+                    `;
+                    container.appendChild(typeDiv);
+
+                    const capacityDiv = document.createElement('div');
+                    capacityDiv.className = 'flex flex-col';
+                    capacityDiv.innerHTML = `
+                        <label for="input-storage_capacity" class="mb-1 text-sm font-semibold text-gray-600">${spec.label} - ความจุ (GB)</label>
+                        <input type="number" id="input-storage_capacity" name="storage_capacity" placeholder="ระบุความจุเป็น GB" class="p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500" min="0">
+                    `;
+                    container.appendChild(capacityDiv);
+                    inputFormDiv.appendChild(container);
+
                 } else {
-                    const select = document.createElement('select');
-                    select.id = `input-${specKey}`;
-                    select.name = specKey;
-                    select.className = 'p-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500';
-                    const optionYes = document.createElement('option');
-                    optionYes.value = "true";
-                    optionYes.textContent = "มี";
-                    const optionNo = document.createElement('option');
-                    optionNo.value = "false";
-                    optionNo.textContent = "ไม่มี";
-                    select.appendChild(optionYes);
-                    select.appendChild(optionNo);
-                    inputDiv.appendChild(select);
+                    const label = document.createElement('label');
+                    label.htmlFor = `input-${specKey}`;
+                    label.className = 'mb-1 text-sm font-semibold text-gray-600';
+                    label.textContent = spec.label;
+                    inputDiv.appendChild(label);
+                    
+                    if (spec.type === 'number') {
+                        const input = document.createElement('input');
+                        input.type = 'number';
+                        input.id = `input-${specKey}`;
+                        input.name = specKey;
+                        input.placeholder = `ขั้นต่ำ ${spec.min}`;
+                        input.className = 'p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500';
+                        input.min = 0;
+                        if(spec.step) input.step = spec.step;
+                        inputDiv.appendChild(input);
+                    } else {
+                        const select = document.createElement('select');
+                        select.id = `input-${specKey}`;
+                        select.name = specKey;
+                        select.className = 'p-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500';
+                        const optionYes = document.createElement('option');
+                        optionYes.value = "true";
+                        optionYes.textContent = "มี";
+                        const optionNo = document.createElement('option');
+                        optionNo.value = "false";
+                        optionNo.textContent = "ไม่มี";
+                        select.appendChild(optionYes);
+                        select.appendChild(optionNo);
+                        inputDiv.appendChild(select);
+                    }
+                    inputFormDiv.appendChild(inputDiv);
                 }
-                inputFormDiv.appendChild(inputDiv);
             }
         }
 
@@ -463,30 +519,42 @@
             
             for (const specKey in data.specs) {
                 const spec = data.specs[specKey];
-                const inputElement = document.getElementById(`input-${specKey}`);
-                const userValue = inputElement.value;
-
                 let isPass = false;
                 let resultText = '';
+                
+                if (spec.type === 'storage_choice') {
+                    const storageType = document.getElementById('input-storage_type').value;
+                    const userNum = parseFloat(document.getElementById('input-storage_capacity').value);
+                    const minRequired = (storageType === 'SSD') ? spec.min_ssd : spec.min_hdd;
 
-                if (spec.type === 'number') {
-                    const userNum = parseFloat(userValue);
-                    if (isNaN(userNum) || userNum < spec.min) {
-                        isPass = false;
-                        allPass = false;
-                    } else {
+                    if (!isNaN(userNum) && userNum >= minRequired) {
                         isPass = true;
-                    }
-                    resultText = `เกณฑ์: ≥ ${spec.min} ${spec.unit} | กรอก: ${userValue || 'N/A'} ${spec.unit}`;
-                } else { 
-                     const userBool = (userValue === "true");
-                    if (spec.required && !userBool) {
-                        isPass = false;
-                        allPass = false;
                     } else {
-                        isPass = true;
+                        allPass = false;
                     }
-                    resultText = `เกณฑ์: ต้องมี | สถานะ: ${userBool ? 'มี' : 'ไม่มี'}`;
+                    resultText = `เกณฑ์: ${storageType} ≥ ${minRequired} GB | กรอก: ${storageType} ${!isNaN(userNum) ? userNum : 'N/A'} GB`;
+                
+                } else {
+                    const inputElement = document.getElementById(`input-${specKey}`);
+                    const userValue = inputElement.value;
+
+                    if (spec.type === 'number') {
+                        const userNum = parseFloat(userValue);
+                        if (!isNaN(userNum) && userNum >= spec.min) {
+                           isPass = true;
+                        } else {
+                           allPass = false;
+                        }
+                        resultText = `เกณฑ์: ≥ ${spec.min} ${spec.unit} | กรอก: ${userValue || 'N/A'} ${spec.unit}`;
+                    } else { // boolean
+                         const userBool = (userValue === "true");
+                        if (!spec.required || userBool) {
+                            isPass = true;
+                        } else {
+                            allPass = false;
+                        }
+                        resultText = `เกณฑ์: ต้องมี | สถานะ: ${userBool ? 'มี' : 'ไม่มี'}`;
+                    }
                 }
 
                 const resultItem = document.createElement('div');
@@ -519,4 +587,3 @@
     </script>
 </body>
 </html>
-
