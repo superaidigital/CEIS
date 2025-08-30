@@ -39,6 +39,44 @@
              border-color: transparent;
              color: #6b7280; /* gray-500 */
         }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #result-area, #result-area * {
+                visibility: visible;
+            }
+            #result-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                padding: 1rem;
+                box-shadow: none;
+                border: none;
+            }
+            /* Hide elements we don't want printed inside the result area */
+            #print-button, #print-button * {
+                visibility: hidden;
+            }
+            #print-footer {
+                display: block !important;
+            }
+            /* Ensure background colors are printed for the result badges */
+            .result-badge, #final-result {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+             /* Make result text black for better readability on paper */
+            .pass-badge, .fail-badge, #final-result, #print-footer, #print-footer * {
+                color: #000 !important;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -111,7 +149,7 @@
                     <p class="text-gray-700 mb-4">
                         เกณฑ์ราคากลางและคุณลักษณะพื้นฐานการจัดหาอุปกรณ์และระบบคอมพิวเตอร์ ฉบับเดือนมีนาคม พ.ศ. 2566
                     </p>
-                    <a href="https://www.mdes.go.th/service/detail/6650-%E0%B9%80%E0%B8%81%E0%B8%93%E0%B8%91%E0%B9%8C%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%87%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B8%93%E0%B8%B0%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%90%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%AB%E0%B8%B2%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%84%E0%B8%AD%E0%B8%A1%E0%B8%9E%E0%B8%B4%E0%B8%A7%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%89%E0%B8%9B%E0%B8%B1%E0%B8%9A%E0%B9%80%E0%B8%94%E0%B8%B7%E0%B8%AD%E0%B8%99%E0%B8%A1%E0%B8%B5%E0%B8%99%E0%B8%B2%E0%B8%84%E0%B8%A่ม-2566" target="_blank" rel="noopener noreferrer" class="inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+                    <a href="https://www.mdes.go.th/service/detail/6650-%E0%B9%80%E0%B8%81%E0%B8%93%E0%B8%91%E0%B9%8C%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%87%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B8%93%E0%B8%B0%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%90%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%AB%E0%B8%B2%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%84%E0%B8%AD%E0%B8%A1%E0%B8%9E%E0%B8%B4%E0%B8%A7%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B9%80%E0%B8%94%E0%B8%B7%E0%B8%AD%E0%B8%99%E0%B8%A1%E0%B8%B5%E0%B8%99%E0%B8%B2%E0%B8%84%E0%B8%A่ม-2566" target="_blank" rel="noopener noreferrer" class="inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">
                         ดาวน์โหลดไฟล์ PDF
                     </a>
                 </div>
@@ -157,9 +195,20 @@
 
                     <!-- Comparison Result -->
                     <div id="result-area" class="hidden mt-8">
-                        <h2 id="result-header" class="text-xl font-bold text-purple-700 mb-4 border-b-2 border-purple-200 pb-2">ผลการเปรียบเทียบ</h2>
-                        <div id="comparison-result" class="space-y-2"></div>
+                        <h2 id="result-header" class="text-xl font-bold text-purple-700 mb-4 border-b-2 border-purple-200 pb-2">ตารางเปรียบเทียบ</h2>
+                        <div id="comparison-result" class="overflow-x-auto"></div>
                         <div id="final-result" class="mt-6 text-2xl font-bold text-center p-4 rounded-lg"></div>
+                         <div class="mt-6 text-center">
+                            <button id="print-button" class="inline-flex items-center bg-gray-600 text-white font-bold py-2 px-5 rounded-lg hover:bg-gray-700 transition-transform transform hover:scale-105 shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                                </svg>
+                                พิมพ์ผลการตรวจสอบ
+                            </button>
+                        </div>
+                        <div id="print-footer" class="hidden mt-8 pt-4 border-t-2 border-dashed border-gray-400">
+                            <!-- This content is populated by JavaScript and only visible on print -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -386,6 +435,7 @@
         const resultHeader = document.getElementById('result-header');
         const comparisonResultDiv = document.getElementById('comparison-result');
         const finalResultDiv = document.getElementById('final-result');
+        const printFooter = document.getElementById('print-footer');
 
         // --- Tab Logic ---
         function switchTab(activeTab) {
@@ -536,27 +586,46 @@
             if (!selectedKey) return;
 
             const data = specData[selectedKey];
-            comparisonResultDiv.innerHTML = '';
+            comparisonResultDiv.innerHTML = ''; // Clear previous results
             let allPass = true;
             
-            resultHeader.innerHTML = `ผลการเปรียบเทียบ: <span class="text-gray-800 font-normal">${data.name}</span>`;
+            resultHeader.innerHTML = `ตารางเปรียบเทียบ: <span class="text-gray-800 font-normal">${data.name}</span>`;
+
+            const table = document.createElement('table');
+            table.className = 'w-full text-sm text-left text-gray-700 border-collapse border border-gray-300';
+            
+            const thead = document.createElement('thead');
+            thead.className = 'text-xs text-gray-800 uppercase bg-gray-100';
+            thead.innerHTML = `
+                <tr>
+                    <th scope="col" class="px-4 py-3 border border-gray-300">คุณลักษณะ</th>
+                    <th scope="col" class="px-4 py-3 border border-gray-300">เกณฑ์ขั้นต่ำ</th>
+                    <th scope="col" class="px-4 py-3 border border-gray-300">คุณสมบัติที่กรอก</th>
+                    <th scope="col" class="px-4 py-3 border border-gray-300 text-center">ผลการตรวจสอบ</th>
+                </tr>
+            `;
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
 
             for (const specKey in data.specs) {
                 const spec = data.specs[specKey];
                 let isPass = false;
-                let resultText = '';
-                
+                let criteriaText = '';
+                let userText = '';
+
                 if (spec.type === 'storage_choice') {
                     const storageType = document.getElementById('input-storage_type').value;
                     const userNum = parseFloat(document.getElementById('input-storage_capacity').value);
                     const minRequired = (storageType === 'SSD') ? spec.min_ssd : spec.min_hdd;
 
+                    criteriaText = `${storageType} ≥ ${minRequired} GB`;
+                    userText = `${storageType} ${!isNaN(userNum) ? userNum : 'N/A'} GB`;
                     if (!isNaN(userNum) && userNum >= minRequired) {
                         isPass = true;
                     } else {
                         allPass = false;
                     }
-                    resultText = `เกณฑ์: ${storageType} ≥ ${minRequired} GB | กรอก: ${storageType} ${!isNaN(userNum) ? userNum : 'N/A'} GB`;
                 
                 } else {
                     const inputElement = document.getElementById(`input-${specKey}`);
@@ -564,10 +633,14 @@
 
                     if (spec.type === 'number') {
                         const userNum = parseFloat(userValue);
-                        // Special handling for TB vs GB
                         let minRequired = spec.min;
-                        if (specKey === 'storage' && spec.unit.includes('TB')) {
+                         if (specKey === 'storage' && spec.unit.includes('TB')) {
                             minRequired = spec.min * 1000;
+                            criteriaText = `≥ ${minRequired} GB`;
+                            userText = `${userValue || 'N/A'} GB`;
+                        } else {
+                            criteriaText = `≥ ${spec.min} ${spec.unit}`;
+                            userText = `${userValue || 'N/A'} ${spec.unit}`;
                         }
 
                         if (!isNaN(userNum) && userNum >= minRequired) {
@@ -575,37 +648,34 @@
                         } else {
                            allPass = false;
                         }
-
-                        if (specKey === 'storage' && spec.unit.includes('TB')) {
-                             resultText = `เกณฑ์: ≥ ${minRequired} GB | กรอก: ${userValue || 'N/A'} GB`;
-                        } else {
-                             resultText = `เกณฑ์: ≥ ${spec.min} ${spec.unit} | กรอก: ${userValue || 'N/A'} ${spec.unit}`;
-                        }
                     } else { // boolean
-                         const userBool = (userValue === "true");
+                        const userBool = (userValue === "true");
+                        criteriaText = 'ต้องมี';
+                        userText = userBool ? 'มี' : 'ไม่มี';
                         if (!spec.required || userBool) {
                             isPass = true;
                         } else {
                             allPass = false;
                         }
-                        resultText = `เกณฑ์: ต้องมี | สถานะ: ${userBool ? 'มี' : 'ไม่มี'}`;
                     }
                 }
 
-                const resultItem = document.createElement('div');
-                resultItem.className = 'flex justify-between items-center p-3 rounded-lg';
-                resultItem.classList.add(isPass ? 'bg-green-50' : 'bg-red-50');
-
-                resultItem.innerHTML = `
-                    <div>
-                        <p class="font-bold">${spec.label}</p>
-                        <p class="text-sm text-gray-600">${resultText}</p>
-                    </div>
-                    <span class="result-badge ${isPass ? 'pass-badge' : 'fail-badge'}">${isPass ? 'ผ่าน' : 'ไม่ผ่าน'}</span>
+                const tr = document.createElement('tr');
+                tr.className = 'bg-white border-b hover:bg-gray-50';
+                tr.innerHTML = `
+                    <td class="px-4 py-2 border border-gray-300 font-bold">${spec.label}</td>
+                    <td class="px-4 py-2 border border-gray-300">${criteriaText}</td>
+                    <td class="px-4 py-2 border border-gray-300">${userText}</td>
+                    <td class="px-4 py-2 border border-gray-300 text-center">
+                        <span class="result-badge ${isPass ? 'pass-badge' : 'fail-badge'}">${isPass ? 'ผ่าน' : 'ไม่ผ่าน'}</span>
+                    </td>
                 `;
-                comparisonResultDiv.appendChild(resultItem);
+                tbody.appendChild(tr);
             }
             
+            table.appendChild(tbody);
+            comparisonResultDiv.appendChild(table);
+
             finalResultDiv.innerHTML = '';
             finalResultDiv.classList.remove('bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
             if (allPass) {
@@ -618,6 +688,25 @@
             
             resultArea.classList.remove('hidden');
             resultArea.scrollIntoView({ behavior: 'smooth' });
+
+            // Populate the print-only footer
+            const pdfUrl = 'https://www.mdes.go.th/service/detail/6650-%E0%B9%80%E0%B8%81%E0%B8%93%E0%B8%91%E0%B9%8C%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%87%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B8%93%E0%B8%B0%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%90%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%AB%E0%B8%B2%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%84%E0%B8%AD%E0%B8%A1%E0%B8%9E%E0%B8%B4%E0%B8%A7%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B9%80%E0%B8%94%E0%B8%B7%E0%B8%AD%E0%B8%99%E0%B8%A1%E0%B8%B5%E0%B8%99%E0%B8%B2%E0%B8%84%E0%B8%A่ม-2566';
+            printFooter.innerHTML = `
+                <h3 class="text-lg font-bold">เอกสารอ้างอิง</h3>
+                <p class="text-sm">
+                    ผลการตรวจสอบสำหรับ <strong>${data.name}</strong> อ้างอิงตามเอกสารเกณฑ์ราคากลางฯ <strong>หน้า ${data.page}</strong>.
+                </p>
+                <p class="text-sm mt-2">
+                    <strong>คำแนะนำ:</strong> กรุณาพิมพ์เอกสารหน้า ${data.page} จากไฟล์ PDF ต้นฉบับเพื่อแนบเป็นหลักฐานประกอบ
+                </p>
+                <p class="text-xs text-gray-700 mt-1">
+                    <strong>URL:</strong> <a href="${pdfUrl}" target="_blank" class="hover:underline">${pdfUrl}</a>
+                </p>
+            `;
+        });
+
+        document.getElementById('print-button').addEventListener('click', () => {
+            window.print();
         });
     </script>
 </body>
