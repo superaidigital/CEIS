@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบตรวจสอบคุณลักษณะครุภัณฑ์คอมพิวเตอร์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        .pass {
+            color: #16a34a; /* green-600 */
+        }
+        .fail {
+            color: #dc2626; /* red-600 */
+        }
+        .result-badge {
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .pass-badge {
+            background-color: #dcfce7; /* green-100 */
+            color: #166534; /* green-800 */
+        }
+        .fail-badge {
+            background-color: #fee2e2; /* red-100 */
+            color: #991b1b; /* red-800 */
+        }
+        .tab-active {
+            border-color: #3b82f6; /* blue-500 */
+            color: #2563eb; /* blue-600 */
+            font-weight: bold;
+        }
+        .tab-inactive {
+             border-color: transparent;
+             color: #6b7280; /* gray-500 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
+        <header class="text-center mb-8">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">ระบบตรวจสอบครุภัณฑ์คอมพิวเตอร์</h1>
+            <p class="text-gray-600 mt-2">ตามเกณฑ์ราคากลางและคุณลักษณะพื้นฐานฯ (ฉบับเดือนมีนาคม พ.ศ. 2566)</p>
+        </header>
+
+        <main class="bg-white p-6 rounded-2xl shadow-lg">
+            <!-- Tabs Navigation -->
+            <div class="border-b border-gray-200 mb-6">
+                <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                    <button id="home-tab" class="whitespace-nowrap py-4 px-1 border-b-2 text-base tab-active">
+                        หน้าหลัก
+                    </button>
+                    <button id="checker-tab" class="whitespace-nowrap py-4 px-1 border-b-2 text-base tab-inactive hover:border-gray-300 hover:text-gray-700">
+                        โปรแกรมตรวจสอบ
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Home Content -->
+            <div id="home-content">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">ยินดีต้อนรับสู่ระบบตรวจสอบครุภัณฑ์คอมพิวเตอร์</h2>
+                <p class="text-gray-600 mb-6">
+                    เครื่องมือนี้ถูกออกแบบมาเพื่อช่วยให้หน่วยงานภาครัฐสามารถตรวจสอบคุณลักษณะของครุภัณฑ์คอมพิวเตอร์ที่ต้องการจัดหา ว่าสอดคล้องกับเกณฑ์ราคากลางและคุณลักษณะพื้นฐานการจัดหาอุปกรณ์และระบบคอมพิวเตอร์ ฉบับเดือนมีนาคม พ.ศ. 2566 หรือไม่ เพื่อความสะดวก รวดเร็ว และลดข้อผิดพลาดในการจัดทำเอกสาร
+                </p>
+
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-blue-800 mb-3">ขั้นตอนการใช้งาน</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                        <li>ไปที่แท็บ <span class="font-bold">"โปรแกรมตรวจสอบ"</span></li>
+                        <li>เลือกประเภทครุภัณฑ์ที่ท่านต้องการจากรายการ</li>
+                        <li>ระบบจะแสดงคุณลักษณะพื้นฐานตามเกณฑ์และราคากลาง</li>
+                        <li>กรอกคุณสมบัติของอุปกรณ์ที่ท่านจะจัดหาในช่องที่กำหนด</li>
+                        <li>กดปุ่ม <span class="font-bold text-white bg-blue-600 py-1 px-2 rounded-md">"ประมวลผลการตรวจสอบ"</span></li>
+                        <li>ระบบจะแสดงผลการเปรียบเทียบ พร้อมสรุปผลว่า "ผ่าน" หรือ "ไม่ผ่าน" ตามเกณฑ์</li>
+                    </ol>
+                </div>
+
+                <div class="mt-8 bg-amber-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-amber-800 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                        วิธีตรวจสอบผลทดสอบ Passmark
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        คะแนน Passmark เป็นเกณฑ์สำคัญในการวัดประสิทธิภาพของ CPU คุณสามารถตรวจสอบคะแนนของ CPU รุ่นต่างๆ ได้โดยตรงจากเว็บไซต์ cpubenchmark.net
+                    </p>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                        <li>ไปที่เว็บไซต์ <a href="https://www.cpubenchmark.net/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">cpubenchmark.net</a></li>
+                        <li>ค้นหาชื่อรุ่น CPU ที่ต้องการในช่องค้นหา (Search for your CPU)</li>
+                        <li>ดูผลลัพธ์ในส่วน <span class="font-bold">"CPU Mark"</span> และนำคะแนนมากรอกในโปรแกรม</li>
+                    </ol>
+                    <a href="https://www.cpubenchmark.net/" target="_blank" rel="noopener noreferrer" class="inline-block bg-amber-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-amber-700 transition">
+                        ไปยังเว็บไซต์ Passmark
+                    </a>
+                </div>
+
+                 <div class="mt-8 bg-green-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-green-800 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        ดาวน์โหลดเอกสารอ้างอิง
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        เกณฑ์ราคากลางและคุณลักษณะพื้นฐานการจัดหาอุปกรณ์และระบบคอมพิวเตอร์ ฉบับเดือนมีนาคม พ.ศ. 2566
+                    </p>
+                    <a href="https://www.mdes.go.th/service/detail/6650-%E0%B9%80%E0%B8%81%E0%B8%93%E0%B8%91%E0%B9%8C%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%87%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B8%93%E0%B8%B0%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%90%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%AB%E0%B8%B2%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%84%E0%B8%AD%E0%B8%A1%E0%B8%9E%E0%B8%B4%E0%B8%A7%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B9%80%E0%B8%94%E0%B8%B7%E0%B8%AD%E0%B8%99%E0%B8%A1%E0%B8%B5%E0%B8%99%E0%B8%B2%E0%B8%84%E0%B8%A1-2566" target="_blank" rel="noopener noreferrer" class="inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+                        ดาวน์โหลดไฟล์ PDF
+                    </a>
+                </div>
+
+                 <div class="mt-8 text-center">
+                    <button id="go-to-checker-btn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md">
+                        เริ่มต้นใช้งานโปรแกรมตรวจสอบ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Checker Content -->
+            <div id="checker-content" class="hidden">
+                 <!-- Equipment Selection -->
+                <div class="mb-6">
+                    <label for="equipment-select" class="block text-lg font-bold mb-2 text-gray-700">1. เลือกประเภทครุภัณฑ์ที่ต้องการตรวจสอบ</label>
+                    <select id="equipment-select" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        <option value="">-- กรุณาเลือก --</option>
+                    </select>
+                </div>
+
+                <!-- Main content area -->
+                <div id="content-area" class="hidden">
+                    <!-- Standard Specs Display -->
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold text-blue-700 mb-3 border-b-2 border-blue-200 pb-2">คุณลักษณะพื้นฐานตามเกณฑ์ราคากลาง</h2>
+                        <div id="standard-specs" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700"></div>
+                         <div class="mt-4 text-center bg-blue-50 p-4 rounded-lg">
+                            <span class="font-bold text-xl text-blue-800">ราคากลาง: <span id="standard-price" class="font-bold"></span> บาท</span>
+                        </div>
+                    </div>
+
+                    <!-- User Input Form -->
+                    <div>
+                        <h2 class="text-xl font-bold text-green-700 mb-4 border-b-2 border-green-200 pb-2">2. กรอกคุณสมบัติของอุปกรณ์ที่จะจัดหา</h2>
+                        <div id="input-form" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4"></div>
+                        <div class="mt-6 text-center">
+                             <button id="check-button" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md">
+                                ประมวลผลการตรวจสอบ
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Result -->
+                    <div id="result-area" class="hidden mt-8">
+                        <h2 class="text-xl font-bold text-purple-700 mb-4 border-b-2 border-purple-200 pb-2">ผลการเปรียบเทียบ</h2>
+                        <div id="comparison-result" class="space-y-2"></div>
+                        <div id="final-result" class="mt-6 text-2xl font-bold text-center p-4 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="text-center mt-8 text-sm text-gray-500">
+            <p>
+                อ้างอิง: เกณฑ์ราคากลางและคุณลักษณะพื้นฐานการจัดหาอุปกรณ์และระบบคอมพิวเตอร์ ฉบับเดือนมีนาคม พ.ศ. 2566
+                <br>
+                จัดทำโดย: กองยุทศาสตร์และงบประมาณ องค์การบริหารส่วนจังหวัดศรีสะเกษ
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        const specData = {
+            "pc-office": {
+                name: "เครื่องคอมพิวเตอร์สำหรับงานสำนักงาน",
+                price: "16000",
+                specs: {
+                    cpu_cores: { label: "CPU (Cores)", type: "number", min: 6, unit: "Cores" },
+                    cpu_ghz: { label: "ความเร็วสัญญาณนาฬิกาพื้นฐาน (GHz)", type: "number", min: 2.5, step: 0.1, unit: "GHz" },
+                    cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 10000, unit: "คะแนน" },
+                    ram: { label: "RAM (GB)", type: "number", min: 8, unit: "GB DDR4" },
+                    storage: { label: "Storage (GB)", type: "number", min: 256, unit: "GB SSD" },
+                    display: { label: "จอภาพ (นิ้ว)", type: "number", min: 19, unit: 'นิ้ว Full HD' },
+                    dvd: { label: "DVD Drive", type: "boolean", required: true },
+                    network: { label: "Network Interface", type: "boolean", required: true, text: "1 Gbps" },
+                    wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
+                }
+            },
+            "pc-processing": {
+                name: "เครื่องคอมพิวเตอร์สำหรับงานประมวลผล แบบที่ 1",
+                price: "22000",
+                specs: {
+                    cpu_cores: { label: "CPU (Cores)", type: "number", min: 6, unit: "Cores" },
+                    cpu_ghz: { label: "ความเร็วสัญญาณนาฬิกาพื้นฐาน (GHz)", type: "number", min: 3.0, step: 0.1, unit: "GHz" },
+                    cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 15000, unit: "คะแนน" },
+                    ram: { label: "RAM (GB)", type: "number", min: 16, unit: "GB DDR4" },
+                    storage: { label: "Storage (GB)", type: "number", min: 512, unit: "GB SSD" },
+                    display: { label: "จอภาพ (นิ้ว)", type: "number", min: 19, unit: 'นิ้ว Full HD' },
+                    dvd: { label: "DVD Drive", type: "boolean", required: true },
+                    network: { label: "Network Interface", type: "boolean", required: true, text: "1 Gbps" },
+                    wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
+                }
+            },
+            "pc-processing-2": {
+                name: "เครื่องคอมพิวเตอร์สำหรับงานประมวลผล แบบที่ 2",
+                price: "30000",
+                specs: {
+                    cpu_cores: { label: "CPU (Cores)", type: "number", min: 8, unit: "Cores" },
+                    cpu_threads: { label: "CPU (Threads)", type: "number", min: 16, unit: "Threads" },
+                    cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 20000, unit: "คะแนน" },
+                    ram: { label: "RAM (GB)", type: "number", min: 16, unit: "GB DDR4" },
+                    storage: { label: "Storage (GB)", type: "number", min: 1000, unit: "GB SSD" },
+                    display: { label: "จอภาพ (นิ้ว)", type: "number", min: 21.5, step: 0.1, unit: 'นิ้ว Full HD' },
+                    dvd: { label: "DVD Drive", type: "boolean", required: true },
+                    network: { label: "Network Interface", type: "boolean", required: true, text: "1 Gbps" },
+                    wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
+                }
+            },
+            "aio-office": {
+                name: "เครื่องคอมพิวเตอร์ All-in-One สำหรับงานสำนักงาน",
+                price: "21000",
+                specs: {
+                    cpu_cores: { label: "CPU (Cores)", type: "number", min: 6, unit: "Cores" },
+                    cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 10000, unit: "คะแนน" },
+                    ram: { label: "RAM (GB)", type: "number", min: 8, unit: "GB DDR4" },
+                    storage: { label: "Storage (GB)", type: "number", min: 256, unit: "GB SSD" },
+                    display: { label: "จอภาพ (นิ้ว)", type: "number", min: 21.5, step: 0.1, unit: 'นิ้ว Full HD (Built-in)' },
+                    network: { label: "Network Interface", type: "boolean", required: true, text: "1 Gbps" },
+                    wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
+                }
+            },
+            "notebook-office": {
+                name: "เครื่องคอมพิวเตอร์โน้ตบุ๊ก สำหรับงานสำนักงาน",
+                price: "16000",
+                specs: {
+                    cpu_cores: { label: "CPU (Cores)", type: "number", min: 4, unit: "Cores" },
+                    cpu_ghz: { label: "ความเร็วสัญญาณนาฬิกาพื้นฐาน (GHz)", type: "number", min: 2.0, step: 0.1, unit: "GHz" },
+                    cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 6500, unit: "คะแนน" },
+                    ram: { label: "RAM (GB)", type: "number", min: 8, unit: "GB DDR4" },
+                    storage: { label: "Storage (GB)", type: "number", min: 256, unit: "GB SSD" },
+                    display: { label: "จอภาพ (นิ้ว)", type: "number", min: 14, unit: 'นิ้ว Full HD' },
+                    usb_ports: { label: "USB Ports", type: "number", min: 2, unit: "ช่อง" },
+                    battery: { label: "Battery (ชั่วโมง)", type: "number", min: 8, unit: "ชั่วโมง" },
+                    hdmi_vga: { label: "ช่องต่อ HDMI หรือ VGA", type: "boolean", required: true },
+                    wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
+                }
+            },
+            "notebook-processing": {
+                name: "เครื่องคอมพิวเตอร์โน้ตบุ๊ก สำหรับงานประมวลผล",
+                price: "22000",
+                specs: {
+                    cpu_cores: { label: "CPU (Cores)", type: "number", min: 4, unit: "Cores" },
+                    cpu_ghz: { label: "ความเร็วสัญญาณนาฬิกาพื้นฐาน (GHz)", type: "number", min: 2.5, step: 0.1, unit: "GHz" },
+                    cpu_passmark: { label: "ผลทดสอบ Passmark", type: "number", min: 8000, unit: "คะแนน" },
+                    ram: { label: "RAM (GB)", type: "number", min: 8, unit: "GB DDR4" },
+                    storage: { label: "Storage (GB)", type: "number", min: 512, unit: "GB SSD" },
+                    display: { label: "จอภาพ (นิ้ว)", type: "number", min: 14, unit: 'นิ้ว Full HD' },
+                    usb_ports: { label: "USB Ports", type: "number", min: 3, unit: "ช่อง" },
+                    battery: { label: "Battery (ชั่วโมง)", type: "number", min: 8, unit: "ชั่วโมง" },
+                    hdmi_vga: { label: "ช่องต่อ HDMI หรือ VGA", type: "boolean", required: true },
+                    wifi: { label: "Wi-Fi", type: "boolean", required: true, text: "มาตรฐาน ac" },
+                }
+            },
+            "printer-inkjet-multi": {
+                name: "เครื่องพิมพ์ Multifunction แบบฉีดหมึก (Inkjet)",
+                price: "4300",
+                specs: {
+                    multifunction: { label: "เป็นแบบ Multifunction (Print, Copy, Scan)", type: "boolean", required: true },
+                    print_resolution: { label: "ความละเอียดการพิมพ์ (ขาวดำ)", type: "number", min: 1200, unit: "x1200 dpi" },
+                    print_speed: { label: "ความเร็วการพิมพ์ (ขาวดำ)", type: "number", min: 8, unit: "หน้า/นาที (ipm)" },
+                    paper_tray: { label: "ถาดป้อนกระดาษ", type: "number", min: 60, unit: "แผ่น" },
+                }
+            },
+            "printer-laser-mono": {
+                name: "เครื่องพิมพ์ Laser ขาวดำ",
+                price: "3300",
+                specs: {
+                    print_speed: { label: "ความเร็วการพิมพ์ (ขาวดำ)", type: "number", min: 18, unit: "หน้า/นาที" },
+                    print_resolution: { label: "ความละเอียดการพิมพ์", type: "number", min: 600, unit: "x600 dpi" },
+                    memory: { label: "หน่วยความจำ (MB)", type: "number", min: 16, unit: "MB" },
+                    network_port: { label: "ช่องเชื่อมต่อระบบเครือข่าย", type: "boolean", required: true, text: "มี" }
+                }
+            },
+             "printer-laser-color": {
+                name: "เครื่องพิมพ์ Laser สี",
+                price: "8900",
+                specs: {
+                    print_speed_color: { label: "ความเร็วการพิมพ์ (สี)", type: "number", min: 4, unit: "หน้า/นาที" },
+                    print_resolution: { label: "ความละเอียดการพิมพ์", type: "number", min: 600, unit: "x600 dpi" },
+                    memory: { label: "หน่วยความจำ (MB)", type: "number", min: 64, unit: "MB" },
+                    network_port: { label: "ช่องเชื่อมต่อระบบเครือข่าย", type: "boolean", required: true, text: "มี" }
+                }
+            },
+            "printer-laser-multi-mono": {
+                name: "เครื่องพิมพ์ Multifunction Laser ขาวดำ",
+                price: "8900",
+                specs: {
+                    multifunction: { label: "เป็นแบบ Multifunction (Print, Copy, Scan)", type: "boolean", required: true },
+                    print_speed: { label: "ความเร็วการพิมพ์ (ขาวดำ)", type: "number", min: 18, unit: "หน้า/นาที" },
+                    print_resolution: { label: "ความละเอียดการพิมพ์", type: "number", min: 600, unit: "x600 dpi" },
+                    memory: { label: "หน่วยความจำ (MB)", type: "number", min: 64, unit: "MB" },
+                    network_port: { label: "ช่องเชื่อมต่อระบบเครือข่าย", type: "boolean", required: true, text: "มี" }
+                }
+            },
+            "ups-800va": {
+                name: "เครื่องสำรองไฟฟ้า (UPS) ขนาด 800 VA",
+                price: "2500",
+                specs: {
+                    power_va: { label: "กำลังไฟฟ้า (VA)", type: "number", min: 800, unit: "VA" },
+                    power_w: { label: "กำลังไฟฟ้า (W)", type: "number", min: 480, unit: "Watts" },
+                    outlets: { label: "จำนวนเต้ารับสำรองไฟ", type: "number", min: 4, unit: "ช่อง" },
+                }
+            },
+            "ups-1kva": {
+                name: "เครื่องสำรองไฟฟ้า (UPS) ขนาด 1 kVA",
+                price: "4500",
+                specs: {
+                    power_va: { label: "กำลังไฟฟ้า (VA)", type: "number", min: 1000, unit: "VA" },
+                    power_w: { label: "กำลังไฟฟ้า (W)", type: "number", min: 600, unit: "Watts" },
+                    outlets: { label: "จำนวนเต้ารับสำรองไฟ", type: "number", min: 4, unit: "ช่อง" },
+                }
+            }
+        };
+
+        // DOM Elements
+        const homeTab = document.getElementById('home-tab');
+        const checkerTab = document.getElementById('checker-tab');
+        const homeContent = document.getElementById('home-content');
+        const checkerContent = document.getElementById('checker-content');
+        const goToCheckerBtn = document.getElementById('go-to-checker-btn');
+
+        const equipmentSelect = document.getElementById('equipment-select');
+        const contentArea = document.getElementById('content-area');
+        const standardSpecsDiv = document.getElementById('standard-specs');
+        const standardPriceSpan = document.getElementById('standard-price');
+        const inputFormDiv = document.getElementById('input-form');
+        const checkButton = document.getElementById('check-button');
+        const resultArea = document.getElementById('result-area');
+        const comparisonResultDiv = document.getElementById('comparison-result');
+        const finalResultDiv = document.getElementById('final-result');
+
+        // --- Tab Logic ---
+        function switchTab(activeTab) {
+            if (activeTab === 'home') {
+                homeTab.classList.add('tab-active');
+                homeTab.classList.remove('tab-inactive', 'hover:border-gray-300', 'hover:text-gray-700');
+                checkerTab.classList.add('tab-inactive', 'hover:border-gray-300', 'hover:text-gray-700');
+                checkerTab.classList.remove('tab-active');
+                
+                homeContent.classList.remove('hidden');
+                checkerContent.classList.add('hidden');
+            } else { // checker
+                checkerTab.classList.add('tab-active');
+                checkerTab.classList.remove('tab-inactive', 'hover:border-gray-300', 'hover:text-gray-700');
+                homeTab.classList.add('tab-inactive', 'hover:border-gray-300', 'hover:text-gray-700');
+                homeTab.classList.remove('tab-active');
+
+                checkerContent.classList.remove('hidden');
+                homeContent.classList.add('hidden');
+            }
+        }
+
+        homeTab.addEventListener('click', () => switchTab('home'));
+        checkerTab.addEventListener('click', () => switchTab('checker'));
+        goToCheckerBtn.addEventListener('click', () => {
+            switchTab('checker');
+            // A small delay to ensure the content is visible before scrolling
+            setTimeout(() => {
+                checkerContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        });
+
+
+        // --- Checker Logic ---
+        Object.keys(specData).forEach(key => {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = specData[key].name;
+            equipmentSelect.appendChild(option);
+        });
+        
+        equipmentSelect.addEventListener('change', (e) => {
+            const selectedKey = e.target.value;
+            if (selectedKey) {
+                populateContent(selectedKey);
+                contentArea.classList.remove('hidden');
+                resultArea.classList.add('hidden'); 
+            } else {
+                contentArea.classList.add('hidden');
+            }
+        });
+
+        function populateContent(key) {
+            const data = specData[key];
+            standardPriceSpan.textContent = new Intl.NumberFormat().format(data.price);
+            standardSpecsDiv.innerHTML = '';
+            inputFormDiv.innerHTML = '';
+            
+            for (const specKey in data.specs) {
+                const spec = data.specs[specKey];
+                const specDiv = document.createElement('div');
+                specDiv.className = 'p-3 bg-gray-50 rounded-lg';
+                let standardText;
+                if (spec.type === 'number') {
+                    standardText = `ไม่น้อยกว่า ${spec.min} ${spec.unit}`;
+                } else {
+                    standardText = `ต้องมี ${spec.text ? `(${spec.text})` : ''}`;
+                }
+                specDiv.innerHTML = `<span class="font-bold">${spec.label}:</span> ${standardText}`;
+                standardSpecsDiv.appendChild(specDiv);
+                
+                const inputDiv = document.createElement('div');
+                inputDiv.className = 'flex flex-col';
+                
+                const label = document.createElement('label');
+                label.htmlFor = `input-${specKey}`;
+                label.className = 'mb-1 text-sm font-semibold text-gray-600';
+                label.textContent = spec.label;
+                inputDiv.appendChild(label);
+                
+                if (spec.type === 'number') {
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = `input-${specKey}`;
+                    input.name = specKey;
+                    input.placeholder = `ขั้นต่ำ ${spec.min}`;
+                    input.className = 'p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500';
+                    input.min = 0;
+                    if(spec.step) input.step = spec.step;
+                    inputDiv.appendChild(input);
+                } else {
+                    const select = document.createElement('select');
+                    select.id = `input-${specKey}`;
+                    select.name = specKey;
+                    select.className = 'p-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500';
+                    const optionYes = document.createElement('option');
+                    optionYes.value = "true";
+                    optionYes.textContent = "มี";
+                    const optionNo = document.createElement('option');
+                    optionNo.value = "false";
+                    optionNo.textContent = "ไม่มี";
+                    select.appendChild(optionYes);
+                    select.appendChild(optionNo);
+                    inputDiv.appendChild(select);
+                }
+                inputFormDiv.appendChild(inputDiv);
+            }
+        }
+
+        checkButton.addEventListener('click', () => {
+            const selectedKey = equipmentSelect.value;
+            if (!selectedKey) return;
+
+            const data = specData[selectedKey];
+            comparisonResultDiv.innerHTML = '';
+            let allPass = true;
+            
+            for (const specKey in data.specs) {
+                const spec = data.specs[specKey];
+                const inputElement = document.getElementById(`input-${specKey}`);
+                const userValue = inputElement.value;
+
+                let isPass = false;
+                let resultText = '';
+
+                if (spec.type === 'number') {
+                    const userNum = parseFloat(userValue);
+                    if (isNaN(userNum) || userNum < spec.min) {
+                        isPass = false;
+                        allPass = false;
+                    } else {
+                        isPass = true;
+                    }
+                    resultText = `เกณฑ์: ≥ ${spec.min} ${spec.unit} | กรอก: ${userValue || 'N/A'} ${spec.unit}`;
+                } else { 
+                     const userBool = (userValue === "true");
+                    if (spec.required && !userBool) {
+                        isPass = false;
+                        allPass = false;
+                    } else {
+                        isPass = true;
+                    }
+                    resultText = `เกณฑ์: ต้องมี | สถานะ: ${userBool ? 'มี' : 'ไม่มี'}`;
+                }
+
+                const resultItem = document.createElement('div');
+                resultItem.className = 'flex justify-between items-center p-3 rounded-lg';
+                resultItem.classList.add(isPass ? 'bg-green-50' : 'bg-red-50');
+
+                resultItem.innerHTML = `
+                    <div>
+                        <p class="font-bold">${spec.label}</p>
+                        <p class="text-sm text-gray-600">${resultText}</p>
+                    </div>
+                    <span class="result-badge ${isPass ? 'pass-badge' : 'fail-badge'}">${isPass ? 'ผ่าน' : 'ไม่ผ่าน'}</span>
+                `;
+                comparisonResultDiv.appendChild(resultItem);
+            }
+            
+            finalResultDiv.innerHTML = '';
+            finalResultDiv.classList.remove('bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+            if (allPass) {
+                finalResultDiv.textContent = 'สรุปผล: ผ่านตามคุณลักษณะพื้นฐาน';
+                finalResultDiv.classList.add('bg-green-100', 'text-green-800');
+            } else {
+                finalResultDiv.textContent = 'สรุปผล: ไม่ผ่านตามคุณลักษณะพื้นฐาน';
+                 finalResultDiv.classList.add('bg-red-100', 'text-red-800');
+            }
+            
+            resultArea.classList.remove('hidden');
+            resultArea.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
+
